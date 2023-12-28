@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <script>
+    async function readLDUX() {
+      try {
+        const root = await navigator.storage.getDirectory();
+        const ldux = await root.getFileHandle("ldux.jsonld");
+        console.log(ldux);
+        //window.alert(ldux.name);
+        const lduxParagraph = document.getElementById('ldux');
+        lduxParagraph.textContent = ldux.name + ' exists in the The File System API';
+      } catch (error) {
+        const lduxParagraph = document.getElementById('ldux');
+        lduxParagraph.textContent = error;
+        console.error(error);
+        //window.alert(error);
+      }
+    }
+    readLDUX(); // Call the function to start execution
+  </script>
+  <body>
+    <h1>Read local ldux.json file.</h1>
+    <p><a href="/create">Create</a></p>
+    <p><a href="/read">Read</a></p>
+    <p id="ldux"></p>
+    <p><a href="/delete">Delete</a></p>
+    
+  </body>
+</html>
