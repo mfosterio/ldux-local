@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>LDUX Local - Delete</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <script>
+    async function deleteLDUX() {
+      try {
+        const root = await navigator.storage.getDirectory();
+        const ldux = await root.getFileHandle("ldux.jsonld");
+        await root.removeEntry("ldux.jsonld", { "recursive" : true });
+        console.log(ldux);
+        //window.alert(ldux.name);
+        const lduxParagraph = document.getElementById('ldux');
+        lduxParagraph.textContent = ldux.name + ' was deleted from the The File System API';
+      } catch (error) {
+        const lduxParagraph = document.getElementById('ldux');
+        lduxParagraph.textContent = error;
+        console.error(error);
+        //window.alert(error);
+      }
+    }
+    deleteLDUX(); // Call the function to start execution
+  </script>
+  <body>
+    <h1>Delete local ldux.json file.</h1>
+    <p><a href="/ldux-local/createhtml">Create</a></p>
+    <p><a href="/ldux-local/read.html">Read</a></p>
+    <p><a href="/ldux-local/delete.html">Delete</a></p>
+    <p id="ldux"></p>
+  </body>
+</html>
